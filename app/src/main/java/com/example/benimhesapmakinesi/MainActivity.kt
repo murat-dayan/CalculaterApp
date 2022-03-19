@@ -10,15 +10,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        supportActionBar?.hide()
     }
-
     var operator="*"
     var oldNumber=""
     var newOperator=true
     var powResult:Int=1
-
 
     fun btn_numbers(view:View){
 
@@ -81,9 +77,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }
-
         txt_calculate.setText(button_value)
-
     }
 
     fun btn_op(view: View){
@@ -93,13 +87,10 @@ class MainActivity : AppCompatActivity() {
         var btn_div:Button=findViewById(R.id.btn_div)
         var btn_plus:Button=findViewById(R.id.btn_plus)
         var btn_minus:Button=findViewById(R.id.btn_minus)
-        var btn_sqrt:Button=findViewById(R.id.btn_sqrt)
+
         var btn_pow:Button=findViewById(R.id.btn_pow)
         var btn_percent:Button=findViewById(R.id.btn_percent)
-        var btn_negorpos:Button=findViewById(R.id.btn_negorpos)
-
         var chosen_button2=view as Button
-
 
         when(chosen_button2.id){
             btn_multiply.id ->{
@@ -114,26 +105,18 @@ class MainActivity : AppCompatActivity() {
             btn_minus.id ->{
                 operator="-"
             }
-            btn_sqrt.id ->{
-                operator="**"
-            }
+
             btn_pow.id ->{
                 operator="^"
             }
             btn_percent.id ->{
                 operator="%"
             }
-            btn_negorpos.id ->{
-                operator="-/+"
-            }
-
 
         }
 
         oldNumber=txt_calculate.text.toString()
         newOperator=true
-
-
     }
 
     fun btn_equal(view: View){
@@ -156,35 +139,60 @@ class MainActivity : AppCompatActivity() {
             "-" ->{
                 result=oldNumber.toDouble()-newNumber.toDouble()
             }
-            "**" ->{
-                result=oldNumber.toDouble()*oldNumber.toDouble()
-            }
             "^" -> {
-
                 for (i in 1..newNumber.toInt()){
-
                     powResult *= oldNumber.toInt()
-
-
-
                 }
-
                 result=powResult.toDouble()
-
-
             }
             "%" -> {
                 result=oldNumber.toDouble()*(newNumber.toDouble()/100)
             }
-            "-/+" -> {
 
-                result=5.2
+        }
+        txt_calculate.setText(result.toString())
+        newOperator=true
+    }
+
+    fun btn_tick(view: View){
+        var txt_calculate:TextView=findViewById(R.id.txt_calculate)
+        var btn_negorpos:Button=findViewById(R.id.btn_negorpos)
+        var btn_sqrt:Button=findViewById(R.id.btn_sqrt)
+        var chosen_button3=view as Button
+
+        var newNumber=txt_calculate.text.toString()
+        var result:Double?=null
+
+        when(chosen_button3.id){
+            btn_sqrt.id ->{
+                operator="**"
+            }
+            btn_negorpos.id ->{
+                operator="-/+"
+            }
+        }
+        oldNumber=txt_calculate.text.toString()
+        newOperator=true
+
+        when(operator){
+            "**" ->{
+                result=oldNumber.toDouble()*oldNumber.toDouble()
+            }
+            "-/+" -> {
+                if (newNumber.toDouble()>0){
+                    result=(-1)*newNumber.toDouble()
+                }else if (oldNumber.toDouble()>0){
+                    result=(-1)*oldNumber.toDouble()
+                }else if (oldNumber.toDouble()<0){
+                    result=(-1)*oldNumber.toDouble()
+                }
+
             }
 
         }
-
         txt_calculate.setText(result.toString())
         newOperator=true
+
 
     }
 
@@ -193,22 +201,4 @@ class MainActivity : AppCompatActivity() {
         txt_calculate.setText("0")
         newOperator=true
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

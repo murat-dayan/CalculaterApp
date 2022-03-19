@@ -31,7 +31,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="1"
             android:backgroundTint="#C0F482"
-            android:onClick="btn_op"
+            android:onClick="btn_tick"
             android:text="SQRT"
             android:textColor="#A1171616" />
 
@@ -63,8 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#C0F482"
+            android:onClick="btn_tick"
             android:text="-/+"
-            android:onClick="btn_op"
             android:textColor="#A1171616"
             android:textSize="20sp" />
     </TableRow>
