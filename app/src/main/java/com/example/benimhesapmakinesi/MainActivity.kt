@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
+import java.lang.NullPointerException
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -179,12 +181,21 @@ class MainActivity : AppCompatActivity() {
                 result=oldNumber.toDouble()*oldNumber.toDouble()
             }
             "-/+" -> {
-                if (newNumber.toDouble()>0){
-                    result=(-1)*newNumber.toDouble()
-                }else if (oldNumber.toDouble()>0){
-                    result=(-1)*oldNumber.toDouble()
-                }else if (oldNumber.toDouble()<0){
-                    result=(-1)*oldNumber.toDouble()
+                try {
+                    if (newNumber.toDouble()>0){
+                        result=(-1)*newNumber.toDouble()
+                    }else if (oldNumber.toDouble()>0){
+                        result=(-1)*oldNumber.toDouble()
+                    }else if (oldNumber.toDouble()<0){
+                        result=(-1)*oldNumber.toDouble()
+                    }else if (newNumber==null && oldNumber==null){
+                        Toast.makeText(this,"lütfen bir sayı girinizz",Toast.LENGTH_LONG).show()
+                        println("kdsfkak")
+                    }else{
+                        Toast.makeText(this,"0 sayısının pozitifi veya negatifi yoktur",Toast.LENGTH_LONG).show()
+                    }
+                }catch (e:Exception){
+                    println(e.localizedMessage)
                 }
 
             }
